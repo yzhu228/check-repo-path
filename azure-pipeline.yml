@@ -1,0 +1,11 @@
+trigger:
+  batch: true
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - pwsh: |
+      git diff --name-only
+    workingDirectory: $(Build.SourcesDirectory)
+    
