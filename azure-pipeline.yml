@@ -4,13 +4,23 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  envUpdated: 'false'
+
 steps:
   - checkout: self
     fetchDepth: 2
   - pwsh: |
-      git diff --name-only HEAD..HEAD~1
+      $filesArray=$(git diff --name-only HEAD..HEAD~1) -split "\n"
+      $filesArray.ForEach({
+        if ($_.StartsWith("env")) {
+          Write-Host "##vso[task.setvariable variable=envUpdated]true"
+          break
+        }
+      })
     workingDirectory: $(Build.SourcesDirectory)
 
   - pwsh: |
       Write-Host 'Task next to git diff'
+    condition: eq(variables.envUpdated, 'true')
 
