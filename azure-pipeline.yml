@@ -8,9 +8,6 @@ steps:
   - checkout: self
     fetchDepth: 2
   - pwsh: |
-      Write-Host $(Build.SourcesDirectory)
-      pwd
-      ls
       git diff --name-only HEAD..HEAD~1
     workingDirectory: $(Build.SourcesDirectory)
 
