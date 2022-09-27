@@ -6,10 +6,9 @@ pool:
 
 steps:
   - pwsh: |
-      git diff --name-only HEAD HEAD~1
+      git diff --name-only main main~1
     workingDirectory: $(Build.SourcesDirectory)
 
   - pwsh: |
       Write-Host 'Task next to git diff'
 
-      
