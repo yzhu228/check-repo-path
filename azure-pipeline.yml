@@ -5,6 +5,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+  - checkout: self
+    fetchDepth: 2
   - pwsh: |
       Write-Host $(Build.SourcesDirectory)
       pwd
