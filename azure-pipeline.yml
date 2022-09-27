@@ -6,6 +6,8 @@ pool:
 
 steps:
   - pwsh: |
+      pwd
+      ls $(Build.SourcesDirectory)
       git diff --name-only main main~1
     workingDirectory: $(Build.SourcesDirectory)
 
