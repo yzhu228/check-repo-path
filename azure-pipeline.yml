@@ -7,7 +7,7 @@ pool:
 steps:
   - pwsh: |
       Write-Host $(Build.SourcesDirectory)
-      ls $(Build.SourcesDirectory)
+      ls
       git diff --name-only HEAD..HEAD~1
     workingDirectory: $(Build.SourcesDirectory)
 
