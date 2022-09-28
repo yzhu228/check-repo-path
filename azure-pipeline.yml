@@ -5,15 +5,16 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
+  targetPath: 'env'
   envUpdated: 'false'
 
 steps:
   - checkout: self
     fetchDepth: 2
   - pwsh: |
-      $filesArray=$(git diff --name-only HEAD..HEAD~1) -split "\n"
+      $filesArray=$(git diff --name-only HEAD HEAD~1) -split "\n"
       $filesArray.ForEach({
-        if ($_.StartsWith("env")) {
+        if ($_.StartsWith(${{ variables.targetPath }})) {
           Write-Host "##vso[task.setvariable variable=envUpdated]true"
           break
         }
