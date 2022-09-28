@@ -14,7 +14,7 @@ steps:
   - pwsh: |
       $filesArray=$(git diff --name-only HEAD HEAD~1) -split "\n"
       $filesArray.ForEach({
-        if ($_.StartsWith(${{ variables.targetPath }})) {
+        if ($_.StartsWith("${{ variables.targetPath }}")) {
           Write-Host "##vso[task.setvariable variable=envUpdated]true"
           break
         }
